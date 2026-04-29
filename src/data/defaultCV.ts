@@ -33,7 +33,7 @@ export const emptyCV: CVData = {
 
 export const sampleCV: CVData = {
   personal: {
-    photo: '',
+    photo: 'https://randomuser.me/api/portraits/men/32.jpg',
     fullName: 'John Doe',
     jobTitle: 'Frontend Developer',
     location: 'Berlin, Germany',
