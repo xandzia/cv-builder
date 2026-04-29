@@ -41,6 +41,9 @@ export const de: Translations = {
   'personal.summary': 'Berufliche Zusammenfassung',
 
   'skills.title': 'Fähigkeiten',
+  'skills.add': '+ Gruppe hinzufügen',
+  'skills.groupName': 'Gruppenname',
+  'skills.remove': 'Entfernen',
 
   'experience.title': 'Berufserfahrung',
   'experience.position': 'Position',

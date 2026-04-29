@@ -41,6 +41,9 @@ export const uk: Translations = {
   'personal.summary': 'Професійне резюме',
 
   'skills.title': 'Навички',
+  'skills.add': '+ Додати групу',
+  'skills.groupName': 'Назва групи',
+  'skills.remove': 'Видалити',
 
   'experience.title': 'Досвід роботи',
   'experience.position': 'Посада',

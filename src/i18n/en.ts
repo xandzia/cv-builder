@@ -41,6 +41,9 @@ export const en: Translations = {
   'personal.summary': 'Professional Summary',
 
   'skills.title': 'Skills',
+  'skills.add': '+ Add Group',
+  'skills.groupName': 'Group name',
+  'skills.remove': 'Remove',
 
   'experience.title': 'Work Experience',
   'experience.position': 'Position',

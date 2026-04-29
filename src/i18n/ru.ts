@@ -41,6 +41,9 @@ export const ru: Translations = {
   'personal.summary': 'Профессиональное резюме',
 
   'skills.title': 'Навыки',
+  'skills.add': '+ Добавить группу',
+  'skills.groupName': 'Название группы',
+  'skills.remove': 'Удалить',
 
   'experience.title': 'Опыт работы',
   'experience.position': 'Должность',

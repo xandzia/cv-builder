@@ -19,6 +19,14 @@ export default memo(function SkillsForm({ data, onChange }: Props) {
     onChange(updated)
   }
 
+  const addGroup = () => {
+    onChange([...data, { label: '', skills: [] }])
+  }
+
+  const removeGroup = (index: number) => {
+    onChange(data.filter((_, i) => i !== index))
+  }
+
   const reorder = useCallback((from: number, to: number) => {
     const updated = [...data]
     const [moved] = updated.splice(from, 1)
@@ -34,23 +42,40 @@ export default memo(function SkillsForm({ data, onChange }: Props) {
         <div
           key={i}
           {...getDragProps(i)}
-          className="transition-colors rounded-md"
+          className="transition-colors rounded-md mb-3"
           style={{ borderBottom: dragOverIndex === i ? '2px solid #5b6abf' : '2px solid transparent' }}
         >
-          <label className="block">
-            <span className="flex items-center gap-1.5 text-xs font-medium text-gray-500 mb-1">
-              <DragHandle />
-              {group.label}
-            </span>
+          <div className="flex items-center gap-1.5 mb-1">
+            <DragHandle />
             <input
-              className="w-full rounded-md border border-cv-border px-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
-              value={group.skills.join(', ')}
-              onChange={(e) => updateGroup(i, 'skills', e.currentTarget.value.split(',').map((s) => s.trim()).filter(Boolean))}
-              placeholder="Skill 1, Skill 2, Skill 3"
+              className="flex-1 text-xs font-medium text-gray-700 bg-transparent border-b border-transparent focus:border-accent outline-none py-0.5 placeholder:text-gray-400"
+              value={group.label}
+              onChange={(e) => updateGroup(i, 'label', e.currentTarget.value)}
+              placeholder={t('skills.groupName')}
             />
-          </label>
+            <button
+              type="button"
+              onClick={() => removeGroup(i)}
+              className="text-[10px] text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
+            >
+              {t('skills.remove')}
+            </button>
+          </div>
+          <input
+            className="w-full rounded-md border border-cv-border px-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
+            value={group.skills.join(', ')}
+            onChange={(e) => updateGroup(i, 'skills', e.currentTarget.value.split(',').map((s) => s.trim()).filter(Boolean))}
+            placeholder="Skill 1, Skill 2, Skill 3"
+          />
         </div>
       ))}
+      <button
+        type="button"
+        onClick={addGroup}
+        className="w-full py-2 text-sm text-accent hover:bg-accent/5 rounded-lg transition-colors cursor-pointer border border-dashed border-accent/30"
+      >
+        {t('skills.add')}
+      </button>
     </FormSection>
   )
 })

@@ -46,6 +46,9 @@ export interface Translations {
 
   // Skills form
   'skills.title': string
+  'skills.add': string
+  'skills.groupName': string
+  'skills.remove': string
 
   // Experience form
   'experience.title': string
