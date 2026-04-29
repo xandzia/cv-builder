@@ -4,15 +4,30 @@ function toFileName(value: string): string {
   return value.replace(/\s+/g, '').replace(/[^a-zA-Z0-9_-]/g, '')
 }
 
-/** Convert all external <img> inside an element to inline base64 to avoid CORS issues */
-async function inlineExternalImages(root: HTMLElement): Promise<() => void> {
+/**
+ * Before PDF capture, handle external images:
+ * - Try to convert to base64 via fetch
+ * - If CORS blocks the fetch, temporarily blank the src so html-to-image doesn't fail
+ * - Returns a restore function to put original src values back
+ */
+async function prepareImages(root: HTMLElement): Promise<() => void> {
   const images = root.querySelectorAll('img')
   const originals: { img: HTMLImageElement; src: string }[] = []
 
   await Promise.all(
     Array.from(images).map(async (img) => {
       const src = img.src
-      if (!src || src.startsWith('data:') || src.startsWith(window.location.origin)) return
+      if (!src || src.startsWith('data:')) return
+
+      // Same-origin images are fine
+      try {
+        const url = new URL(src)
+        if (url.origin === window.location.origin) return
+      } catch {
+        return
+      }
+
+      originals.push({ img, src })
 
       try {
         const resp = await fetch(src, { mode: 'cors' })
@@ -22,15 +37,14 @@ async function inlineExternalImages(root: HTMLElement): Promise<() => void> {
           reader.onloadend = () => resolve(reader.result as string)
           reader.readAsDataURL(blob)
         })
-        originals.push({ img, src })
         img.src = dataUrl
       } catch {
-        // If fetch fails, leave the image as-is
+        // CORS blocked — blank out src so html-to-image skips it
+        img.src = ''
       }
     }),
   )
 
-  // Return a cleanup function that restores original src attributes
   return () => {
     for (const { img, src } of originals) {
       img.src = src
@@ -52,8 +66,7 @@ export function usePdfExport() {
       const titlePart = toFileName(jobTitle)
       const pdfName = titlePart ? `${namePart}_${titlePart}_cv.pdf` : `${namePart}_cv.pdf`
 
-      // Inline external images as base64 before capture
-      restore = await inlineExternalImages(element)
+      restore = await prepareImages(element)
 
       const { toPng } = await import('html-to-image')
       const { jsPDF } = await import('jspdf')
