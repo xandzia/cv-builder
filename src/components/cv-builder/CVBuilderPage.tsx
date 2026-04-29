@@ -73,7 +73,7 @@ export default function CVBuilderPage() {
         {t('app.skipToPreview')}
       </a>
       <AppHeader
-        onExportPdf={() => exportPdf(cv.personal.fullName)}
+        onExportPdf={() => exportPdf(cv.personal.fullName, cv.personal.jobTitle)}
         exporting={exporting}
         onFillSample={fillSample}
         onClearAll={clearAll}

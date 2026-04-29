@@ -1,16 +1,21 @@
 import { useCallback, useState } from 'react'
-import { slugify } from '../utils/slugify'
+
+function toFileName(value: string): string {
+  return value.replace(/\s+/g, '').replace(/[^a-zA-Z0-9_-]/g, '')
+}
 
 export function usePdfExport() {
   const [exporting, setExporting] = useState(false)
 
-  const exportPdf = useCallback(async (fileName: string) => {
+  const exportPdf = useCallback(async (fullName: string, jobTitle: string) => {
     setExporting(true)
     try {
       const element = document.getElementById('cv-preview')
       if (!element) throw new Error('CV preview element not found')
 
-      const pdfName = `${slugify(fileName) || 'cv'}-cv.pdf`
+      const namePart = toFileName(fullName) || 'cv'
+      const titlePart = toFileName(jobTitle)
+      const pdfName = titlePart ? `${namePart}_${titlePart}_cv.pdf` : `${namePart}_cv.pdf`
 
       // Use html-to-image (SVG foreignObject) for pixel-perfect CSS rendering
       const { toPng } = await import('html-to-image')
