@@ -73,7 +73,6 @@ export function usePdfExport() {
 
       const dataUrl = await toPng(element, {
         pixelRatio: 2,
-        cacheBust: true,
         skipFonts: true,
       })
 
