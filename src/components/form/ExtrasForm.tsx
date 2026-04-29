@@ -18,7 +18,7 @@ export default memo(function ExtrasForm({
   const { t } = useI18n()
 
   return (
-    <FormSection title={t('extras.title')} defaultOpen={false}>
+    <FormSection title={t('extras.title')}>
       <label className="block">
         <span className="block text-xs font-medium text-gray-500 mb-1">
           {t('extras.certifications')}

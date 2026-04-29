@@ -18,7 +18,7 @@ export default memo(function LanguagesForm({ data, onChange }: Props) {
   const { t } = useI18n()
 
   return (
-    <FormSection title={t('languages.title')} defaultOpen={false}>
+    <FormSection title={t('languages.title')}>
       {data.map((item, i) => (
         <div
           key={item.id}
