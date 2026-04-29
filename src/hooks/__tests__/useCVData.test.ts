@@ -1,15 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useCVData } from '../useCVData'
-import { defaultCV } from '../../data/defaultCV'
 
 describe('useCVData', () => {
-  it('initializes with defaultCV', () => {
+  it('initializes with empty personal info', () => {
     const { result } = renderHook(() => useCVData())
-    expect(result.current.cv.personal.fullName).toBe(defaultCV.personal.fullName)
-    expect(result.current.cv.personal.jobTitle).toBe(defaultCV.personal.jobTitle)
-    expect(result.current.cv.experience).toHaveLength(defaultCV.experience.length)
-    expect(result.current.cv.languages).toHaveLength(defaultCV.languages.length)
+    expect(result.current.cv.personal.fullName).toBe('')
+    expect(result.current.cv.personal.jobTitle).toBe('')
+    expect(result.current.cv.personal.email).toBe('')
   })
 
   it('initializes with default accent color', () => {
@@ -33,7 +31,8 @@ describe('useCVData', () => {
     })
 
     expect(result.current.cv.personal.fullName).toBe('New Name')
-    expect(result.current.cv.personal.jobTitle).toBe(defaultCV.personal.jobTitle)
+    // Other fields stay unchanged
+    expect(result.current.cv.personal.jobTitle).toBe('')
   })
 
   it('setAccentColor updates the accent color', () => {
@@ -60,12 +59,15 @@ describe('useCVData', () => {
     const { result } = renderHook(() => useCVData())
 
     act(() => {
-      result.current.update('languages', [])
+      result.current.update('personal', {
+        ...result.current.cv.personal,
+        fullName: 'Test',
+      })
     })
 
-    expect(result.current.cv.languages).toHaveLength(0)
-    expect(result.current.cv.experience).toHaveLength(defaultCV.experience.length)
-    expect(result.current.cv.personal.fullName).toBe(defaultCV.personal.fullName)
+    expect(result.current.cv.personal.fullName).toBe('Test')
+    // Languages stay the same
+    expect(result.current.cv.languages).toHaveLength(1)
   })
 
   it('initializes with default template "two-column"', () => {
