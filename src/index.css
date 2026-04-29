@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #5b6abf;
+  --color-accent-light: #eef0fb;
+  --color-accent-dark: #3d4a8a;
+  --color-cv-gray: #6b7280;
+  --color-cv-border: #e5e7eb;
+  --color-cv-bg: #f8f9fa;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f5f9;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* CV Preview print-accurate styles */
+.cv-preview {
+  width: 210mm;
+  height: 297mm;
+  max-height: 297mm;
+  background: white;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1f2937;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.cv-preview * {
+  box-sizing: border-box;
+}
+
+/* Hide scrollbar for mobile horizontal tab navigation */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .cv-preview,
+  .cv-preview * {
+    visibility: visible;
+  }
+  .cv-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
