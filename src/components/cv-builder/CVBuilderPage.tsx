@@ -18,7 +18,7 @@ export default function CVBuilderPage() {
     cv, update, accentColor, setAccentColor, photoFilter, setPhotoFilter,
     template, setTemplate,
     fillSample, clearAll,
-    undo, redo, canUndo, canRedo,
+    undo, redo,
   } = useCVData()
   const { activeSection, formOpen, handleSectionChange, closeForm } = useActiveSection()
   const { formWidth, onResizeStart } = useResizable()
@@ -77,10 +77,6 @@ export default function CVBuilderPage() {
         exporting={exporting}
         onFillSample={fillSample}
         onClearAll={clearAll}
-        onUndo={undo}
-        onRedo={redo}
-        canUndo={canUndo}
-        canRedo={canRedo}
       />
 
       {/* ===== DESKTOP (md+) ===== */}
