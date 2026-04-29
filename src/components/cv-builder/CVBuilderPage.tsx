@@ -17,6 +17,7 @@ export default function CVBuilderPage() {
   const {
     cv, update, accentColor, setAccentColor, photoFilter, setPhotoFilter,
     template, setTemplate,
+    fillSample, clearAll,
     undo, redo, canUndo, canRedo,
   } = useCVData()
   const { activeSection, formOpen, handleSectionChange, closeForm } = useActiveSection()
@@ -74,6 +75,8 @@ export default function CVBuilderPage() {
       <AppHeader
         onExportPdf={() => exportPdf(cv.personal.fullName)}
         exporting={exporting}
+        onFillSample={fillSample}
+        onClearAll={clearAll}
         onUndo={undo}
         onRedo={redo}
         canUndo={canUndo}

@@ -3,7 +3,35 @@ import type { CVData } from '../types/cv'
 let idCounter = 0
 const uid = () => String(++idCounter)
 
-export const defaultCV: CVData = {
+export const emptyCV: CVData = {
+  personal: {
+    photo: '',
+    fullName: '',
+    jobTitle: '',
+    location: '',
+    email: '',
+    phone: '',
+    linkedin: '',
+    github: '',
+    portfolio: '',
+    summary: '',
+  },
+  skillGroups: [],
+  experience: [],
+  projects: [],
+  education: {
+    degree: '',
+    institution: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+  },
+  languages: [],
+  certifications: [],
+  interests: [],
+}
+
+export const sampleCV: CVData = {
   personal: {
     photo: '',
     fullName: 'John Doe',
@@ -86,7 +114,7 @@ export const defaultCV: CVData = {
     {
       id: uid(),
       name: 'CV Builder App',
-      techStack: 'React, TypeScript, Tailwind CSS, html2pdf.js',
+      techStack: 'React, TypeScript, Tailwind CSS, jsPDF',
       link: 'github.com/johndoe/cv-builder',
       bullets: [
         'Built a single-page CV builder with real-time preview and one-click A4 PDF export',
@@ -128,3 +156,6 @@ export const defaultCV: CVData = {
     'Photography',
   ],
 }
+
+/** Default CV used on first launch (empty form) */
+export const defaultCV = emptyCV

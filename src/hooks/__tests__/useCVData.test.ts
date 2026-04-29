@@ -3,11 +3,10 @@ import { renderHook, act } from '@testing-library/react'
 import { useCVData } from '../useCVData'
 
 describe('useCVData', () => {
-  it('initializes with default personal info', () => {
+  it('initializes with empty personal info', () => {
     const { result } = renderHook(() => useCVData())
-    expect(result.current.cv.personal.fullName).toBe('John Doe')
-    expect(result.current.cv.personal.jobTitle).toBe('Frontend Developer')
-    expect(result.current.cv.personal.email).toBe('john.doe@example.com')
+    expect(result.current.cv.personal.fullName).toBe('')
+    expect(result.current.cv.personal.jobTitle).toBe('')
   })
 
   it('initializes with default accent color', () => {
@@ -31,8 +30,6 @@ describe('useCVData', () => {
     })
 
     expect(result.current.cv.personal.fullName).toBe('New Name')
-    // Other fields stay unchanged
-    expect(result.current.cv.personal.jobTitle).toBe('Frontend Developer')
   })
 
   it('setAccentColor updates the accent color', () => {
@@ -55,19 +52,36 @@ describe('useCVData', () => {
     expect(result.current.photoFilter).toBe('grayscale')
   })
 
-  it('update preserves other CV sections', () => {
+  it('fillSample fills all fields with demo data', () => {
     const { result } = renderHook(() => useCVData())
 
     act(() => {
-      result.current.update('personal', {
-        ...result.current.cv.personal,
-        fullName: 'Test',
-      })
+      result.current.fillSample()
     })
 
-    expect(result.current.cv.personal.fullName).toBe('Test')
-    // Languages stay the same
-    expect(result.current.cv.languages).toHaveLength(3)
+    expect(result.current.cv.personal.fullName).toBe('John Doe')
+    expect(result.current.cv.personal.jobTitle).toBe('Frontend Developer')
+    expect(result.current.cv.experience.length).toBeGreaterThan(0)
+    expect(result.current.cv.skillGroups.length).toBeGreaterThan(0)
+    expect(result.current.cv.projects.length).toBeGreaterThan(0)
+    expect(result.current.cv.languages.length).toBeGreaterThan(0)
+    expect(result.current.cv.certifications.length).toBeGreaterThan(0)
+    expect(result.current.cv.interests.length).toBeGreaterThan(0)
+  })
+
+  it('clearAll resets all fields to empty', () => {
+    const { result } = renderHook(() => useCVData())
+
+    // Fill first, then clear
+    act(() => { result.current.fillSample() })
+    act(() => { result.current.clearAll() })
+
+    expect(result.current.cv.personal.fullName).toBe('')
+    expect(result.current.cv.personal.jobTitle).toBe('')
+    expect(result.current.cv.experience).toHaveLength(0)
+    expect(result.current.cv.skillGroups).toHaveLength(0)
+    expect(result.current.cv.projects).toHaveLength(0)
+    expect(result.current.cv.languages).toHaveLength(0)
   })
 
   it('initializes with default template "two-column"', () => {
@@ -93,5 +107,15 @@ describe('useCVData', () => {
   it('canRedo is false initially', () => {
     const { result } = renderHook(() => useCVData())
     expect(result.current.canRedo).toBe(false)
+  })
+
+  it('undo works after fillSample', () => {
+    const { result } = renderHook(() => useCVData())
+
+    act(() => { result.current.fillSample() })
+    expect(result.current.cv.personal.fullName).toBe('John Doe')
+
+    act(() => { result.current.undo() })
+    expect(result.current.cv.personal.fullName).toBe('')
   })
 })

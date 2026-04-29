@@ -1,4 +1,4 @@
-import { Undo2, Redo2 } from 'lucide-react'
+import { Undo2, Redo2, FileText, Trash2 } from 'lucide-react'
 import { useI18n } from '../../hooks/useI18n'
 import LanguageSwitcher from '../form/LanguageSwitcher'
 
@@ -9,9 +9,11 @@ interface Props {
   onRedo: () => void
   canUndo: boolean
   canRedo: boolean
+  onFillSample: () => void
+  onClearAll: () => void
 }
 
-export default function AppHeader({ onExportPdf, exporting, onUndo, onRedo, canUndo, canRedo }: Props) {
+export default function AppHeader({ onExportPdf, exporting, onUndo, onRedo, canUndo, canRedo, onFillSample, onClearAll }: Props) {
   const { t } = useI18n()
 
   return (
@@ -24,6 +26,23 @@ export default function AppHeader({ onExportPdf, exporting, onUndo, onRedo, canU
           <LanguageSwitcher />
         </div>
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onFillSample}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+          >
+            <FileText size={14} />
+            <span>{t('app.fillSample')}</span>
+          </button>
+          <button
+            type="button"
+            onClick={onClearAll}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+          >
+            <Trash2 size={14} />
+            <span>{t('app.clearAll')}</span>
+          </button>
+          <div className="w-px h-6 bg-gray-200 mx-1 hidden sm:block" />
           <button
             type="button"
             onClick={onUndo}
