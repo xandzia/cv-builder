@@ -65,7 +65,7 @@ export default function AppHeader({ onExportPdf, exporting, onUndo, onRedo, canU
           <button
             onClick={onExportPdf}
             disabled={exporting}
-            className="px-5 py-2 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent-dark disabled:opacity-50 transition-colors shadow-sm cursor-pointer disabled:cursor-wait"
+            className="min-w-[160px] px-5 py-2 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent-dark disabled:opacity-50 transition-colors shadow-sm cursor-pointer disabled:cursor-wait"
           >
             {exporting ? t('app.generatingPdf') : t('app.downloadPdf')}
           </button>
