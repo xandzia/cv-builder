@@ -37,13 +37,14 @@ export default memo(function CVPreview({ data, accentColor, photoFilter, visibil
       id="cv-preview"
       style={{
         display: 'flex',
+        width: '210mm',
+        height: '297mm',
+        maxHeight: '297mm',
         fontSize: '13px',
         lineHeight: 1.5,
         color: TEXT_DARK,
         fontFamily: "'Inter', system-ui, sans-serif",
         overflow: 'hidden',
-        height: '297mm',
-        maxHeight: '297mm',
         padding: '10px',
         boxSizing: 'border-box' as const,
         backgroundColor: 'white',
