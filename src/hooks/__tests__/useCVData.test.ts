@@ -3,11 +3,11 @@ import { renderHook, act } from '@testing-library/react'
 import { useCVData } from '../useCVData'
 
 describe('useCVData', () => {
-  it('initializes with empty personal info', () => {
+  it('initializes with default personal info', () => {
     const { result } = renderHook(() => useCVData())
-    expect(result.current.cv.personal.fullName).toBe('')
-    expect(result.current.cv.personal.jobTitle).toBe('')
-    expect(result.current.cv.personal.email).toBe('')
+    expect(result.current.cv.personal.fullName).toBe('John Doe')
+    expect(result.current.cv.personal.jobTitle).toBe('Frontend Developer')
+    expect(result.current.cv.personal.email).toBe('john.doe@example.com')
   })
 
   it('initializes with default accent color', () => {
@@ -32,7 +32,7 @@ describe('useCVData', () => {
 
     expect(result.current.cv.personal.fullName).toBe('New Name')
     // Other fields stay unchanged
-    expect(result.current.cv.personal.jobTitle).toBe('')
+    expect(result.current.cv.personal.jobTitle).toBe('Frontend Developer')
   })
 
   it('setAccentColor updates the accent color', () => {
@@ -67,7 +67,7 @@ describe('useCVData', () => {
 
     expect(result.current.cv.personal.fullName).toBe('Test')
     // Languages stay the same
-    expect(result.current.cv.languages).toHaveLength(1)
+    expect(result.current.cv.languages).toHaveLength(3)
   })
 
   it('initializes with default template "two-column"', () => {
