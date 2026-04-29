@@ -4,8 +4,6 @@ export const en: Translations = {
   'app.title': 'CV Builder',
   'app.downloadPdf': 'Download PDF',
   'app.generatingPdf': 'Generating PDF...',
-  'app.exportJson': 'JSON',
-  'app.import': 'Import',
   'app.skipToPreview': 'Skip to CV preview',
 
   'section.style': 'Style',

@@ -5,8 +5,6 @@ export interface Translations {
   'app.title': string
   'app.downloadPdf': string
   'app.generatingPdf': string
-  'app.exportJson': string
-  'app.import': string
   'app.skipToPreview': string
 
   // Sections

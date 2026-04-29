@@ -4,8 +4,6 @@ export const uk: Translations = {
   'app.title': 'CV Конструктор',
   'app.downloadPdf': 'Завантажити PDF',
   'app.generatingPdf': 'Генерація PDF...',
-  'app.exportJson': 'JSON',
-  'app.import': 'Імпорт',
   'app.skipToPreview': 'Перейти до попереднього перегляду',
 
   'section.style': 'Стиль',

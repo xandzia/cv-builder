@@ -4,8 +4,6 @@ export const ru: Translations = {
   'app.title': 'CV Конструктор',
   'app.downloadPdf': 'Скачать PDF',
   'app.generatingPdf': 'Генерация PDF...',
-  'app.exportJson': 'JSON',
-  'app.import': 'Импорт',
   'app.skipToPreview': 'Перейти к предпросмотру',
 
   'section.style': 'Стиль',

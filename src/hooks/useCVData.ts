@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import type { CVData, PhotoFilterType } from '../types/cv'
 import type { TemplateId } from '../types/templates'
 import { defaultCV } from '../data/defaultCV'
-import { loadState, saveState, exportJSON, importJSON, type AppState } from '../utils/storage'
+import { loadState, saveState } from '../utils/storage'
 import { useUndoRedo } from './useUndoRedo'
 
 interface CVState {
@@ -32,7 +32,7 @@ function loadTemplate(): TemplateId {
 }
 
 export function useCVData() {
-  const { value, historyValue, set, setImmediate, undo, redo, reset, canUndo, canRedo } =
+  const { value, historyValue, set, undo, redo, reset, canUndo, canRedo } =
     useUndoRedo<CVState>(loadInitialState())
 
   const [template, setTemplateState] = useState<TemplateId>(loadTemplate)
@@ -66,15 +66,6 @@ export function useCVData() {
     set({ ...value, photoFilter: filter })
   }, [set, value])
 
-  const exportData = useCallback(() => {
-    exportJSON({ cv: value.cv, accentColor: value.accentColor, photoFilter: value.photoFilter })
-  }, [value])
-
-  const importData = useCallback(async (file: File) => {
-    const state: AppState = await importJSON(file)
-    setImmediate({ cv: state.cv, accentColor: state.accentColor, photoFilter: state.photoFilter })
-  }, [setImmediate])
-
   const resetData = useCallback(() => {
     reset(defaultState)
   }, [reset])
@@ -88,8 +79,6 @@ export function useCVData() {
     setPhotoFilter,
     template,
     setTemplate,
-    exportData,
-    importData,
     resetData,
     undo,
     redo,
