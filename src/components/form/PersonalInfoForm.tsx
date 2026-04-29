@@ -129,7 +129,7 @@ export default memo(function PersonalInfoForm({ data, onChange }: Props) {
         value={data.summary}
         onChange={(e) => update('summary', e.currentTarget.value)}
         placeholder="A brief professional summary..."
-        rows={4}
+        rows={6}
       />
 
       {/* Photo Crop Modal */}
