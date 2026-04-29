@@ -69,6 +69,8 @@ export const uk: Translations = {
   'education.start': 'Початок',
   'education.end': 'Кінець',
   'education.description': 'Опис',
+  'education.add': '+ Додати освіту',
+  'education.remove': 'Видалити',
 
   'languages.title': 'Мови',
   'languages.language': 'Мова',

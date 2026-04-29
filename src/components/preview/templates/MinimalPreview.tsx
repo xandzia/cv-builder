@@ -101,17 +101,21 @@ export default memo(function MinimalPreview({ data, photoFilter, colors, visibil
       )}
 
       {/* Education */}
-      {visibility.education && (education.degree || education.institution) && (
+      {visibility.education && education.some((e) => e.degree || e.institution) && (
         <div style={{ marginBottom: '14px' }}>
           <SectionTitle accent={ACCENT}>Education</SectionTitle>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div>
-              <span style={{ fontWeight: 700, fontSize: '12.5px', color: TEXT_DARK }}>{education.degree}</span>
-              <span style={{ fontSize: '11.5px', color: TEXT_MED }}> — {education.institution}</span>
-            </div>
-            <span style={{ fontSize: '10px', color: TEXT_LIGHT, fontStyle: 'italic' }}>
-              {education.startDate}{education.endDate && ` - ${education.endDate}`}
-            </span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {education.filter((e) => e.degree || e.institution).map((item) => (
+              <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <div>
+                  <span style={{ fontWeight: 700, fontSize: '12.5px', color: TEXT_DARK }}>{item.degree}</span>
+                  <span style={{ fontSize: '11.5px', color: TEXT_MED }}> — {item.institution}</span>
+                </div>
+                <span style={{ fontSize: '10px', color: TEXT_LIGHT, fontStyle: 'italic' }}>
+                  {item.startDate}{item.endDate && ` - ${item.endDate}`}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       )}

@@ -4,31 +4,36 @@ import type { Education } from '../../types/cv'
 import { MainSectionTitle } from './CVSectionTitle'
 
 interface Props {
-  education: Education
+  education: Education[]
   accent: string
 }
 
 export default memo(function CVEducationSection({ education, accent }: Props) {
-  if (!education.degree && !education.institution) return null
+  const filled = education.filter((e) => e.degree || e.institution)
+  if (filled.length === 0) return null
 
   return (
     <div style={{ marginBottom: '14px' }}>
       <MainSectionTitle accent={accent}>Education</MainSectionTitle>
-      <div style={{ fontWeight: 700, fontSize: '14px', color: TEXT_DARK }}>
-        {education.degree}
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <span style={{ fontSize: '12px', color: TEXT_MED }}>{education.institution}</span>
-        <span style={{ fontSize: '10.5px', color: TEXT_LIGHT, fontStyle: 'italic' }}>
-          {education.startDate}
-          {education.endDate && ` - ${education.endDate}`}
-        </span>
-      </div>
-      {education.description && (
-        <p style={{ margin: '3px 0 0', color: TEXT_MED, fontSize: '12px' }}>
-          {education.description}
-        </p>
-      )}
+      {filled.map((item) => (
+        <div key={item.id} style={{ marginBottom: filled.length > 1 ? '8px' : 0 }}>
+          <div style={{ fontWeight: 700, fontSize: '14px', color: TEXT_DARK }}>
+            {item.degree}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <span style={{ fontSize: '12px', color: TEXT_MED }}>{item.institution}</span>
+            <span style={{ fontSize: '10.5px', color: TEXT_LIGHT, fontStyle: 'italic' }}>
+              {item.startDate}
+              {item.endDate && ` - ${item.endDate}`}
+            </span>
+          </div>
+          {item.description && (
+            <p style={{ margin: '3px 0 0', color: TEXT_MED, fontSize: '12px' }}>
+              {item.description}
+            </p>
+          )}
+        </div>
+      ))}
     </div>
   )
 })

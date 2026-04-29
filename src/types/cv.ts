@@ -38,6 +38,7 @@ export interface Project {
 }
 
 export interface Education {
+  id: string
   degree: string
   institution: string
   startDate: string
@@ -68,7 +69,7 @@ export interface CVData {
   skillGroups: SkillGroup[]
   experience: WorkExperience[]
   projects: Project[]
-  education: Education
+  education: Education[]
   languages: Language[]
   certifications: string[]
   interests: string[]

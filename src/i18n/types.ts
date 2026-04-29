@@ -77,6 +77,8 @@ export interface Translations {
   'education.start': string
   'education.end': string
   'education.description': string
+  'education.add': string
+  'education.remove': string
 
   // Languages form
   'languages.title': string

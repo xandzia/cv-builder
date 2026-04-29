@@ -12,7 +12,15 @@ export function loadState(): AppState | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
-    return JSON.parse(raw) as AppState
+    const state = JSON.parse(raw) as AppState
+    // Migrate education from single object to array
+    if (state.cv && !Array.isArray(state.cv.education)) {
+      const edu = state.cv.education as Record<string, string>
+      state.cv.education = (edu.degree || edu.institution)
+        ? [{ id: '1', ...edu } as CVData['education'][number]]
+        : []
+    }
+    return state
   } catch {
     return null
   }

@@ -69,6 +69,8 @@ export const ru: Translations = {
   'education.start': 'Начало',
   'education.end': 'Конец',
   'education.description': 'Описание',
+  'education.add': '+ Добавить образование',
+  'education.remove': 'Удалить',
 
   'languages.title': 'Языки',
   'languages.language': 'Язык',

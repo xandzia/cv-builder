@@ -69,6 +69,8 @@ export const en: Translations = {
   'education.start': 'Start',
   'education.end': 'End',
   'education.description': 'Description',
+  'education.add': '+ Add Education',
+  'education.remove': 'Remove',
 
   'languages.title': 'Languages',
   'languages.language': 'Language',

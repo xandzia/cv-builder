@@ -69,6 +69,8 @@ export const de: Translations = {
   'education.start': 'Beginn',
   'education.end': 'Ende',
   'education.description': 'Beschreibung',
+  'education.add': '+ Ausbildung hinzufügen',
+  'education.remove': 'Entfernen',
 
   'languages.title': 'Sprachen',
   'languages.language': 'Sprache',

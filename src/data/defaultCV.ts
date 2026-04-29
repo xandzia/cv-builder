@@ -19,13 +19,7 @@ export const emptyCV: CVData = {
   skillGroups: [],
   experience: [],
   projects: [],
-  education: {
-    degree: '',
-    institution: '',
-    startDate: '',
-    endDate: '',
-    description: '',
-  },
+  education: [],
   languages: [],
   certifications: [],
   interests: [],
@@ -132,14 +126,17 @@ export const sampleCV: CVData = {
       ],
     },
   ],
-  education: {
-    degree: 'Bachelor of Science in Computer Science',
-    institution: 'Technical University of Munich',
-    startDate: '2016',
-    endDate: '2020',
-    description:
-      'Focus on web technologies and human-computer interaction. Thesis on optimizing SPA performance.',
-  },
+  education: [
+    {
+      id: uid(),
+      degree: 'Bachelor of Science in Computer Science',
+      institution: 'Technical University of Munich',
+      startDate: '2016',
+      endDate: '2020',
+      description:
+        'Focus on web technologies and human-computer interaction. Thesis on optimizing SPA performance.',
+    },
+  ],
   languages: [
     { id: uid(), language: 'English', level: 'Native' },
     { id: uid(), language: 'German', level: 'Fluent (C1)' },
