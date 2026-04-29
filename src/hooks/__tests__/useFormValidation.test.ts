@@ -33,7 +33,7 @@ describe('useFormValidation', () => {
   })
 
   it('updates visible errors when errors object changes', () => {
-    let errors = { fullName: 'Required' }
+    let errors: Record<string, string> = { fullName: 'Required' }
     const { result, rerender } = renderHook(() => useFormValidation(errors))
 
     act(() => {

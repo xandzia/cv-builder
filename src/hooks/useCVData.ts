@@ -32,7 +32,7 @@ function loadTemplate(): TemplateId {
 }
 
 export function useCVData() {
-  const { value, historyValue, set, setImmediate, undo, redo, reset, canUndo, canRedo } =
+  const { value, historyValue, set, setImmediate, undo, redo, canUndo, canRedo } =
     useUndoRedo<CVState>(loadInitialState())
 
   const [template, setTemplateState] = useState<TemplateId>(loadTemplate)
