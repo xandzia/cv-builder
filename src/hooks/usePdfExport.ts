@@ -39,8 +39,8 @@ async function prepareImages(root: HTMLElement): Promise<() => void> {
         })
         img.src = dataUrl
       } catch {
-        // CORS blocked — blank out src so html-to-image skips it
-        img.src = ''
+        // CORS blocked — replace with transparent 1x1 pixel so html-to-image doesn't choke
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
       }
     }),
   )
