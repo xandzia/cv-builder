@@ -72,8 +72,7 @@ export function usePdfExport() {
       const { jsPDF } = await import('jspdf')
 
       const dataUrl = await toPng(element, {
-        pixelRatio: 2,
-        skipFonts: true,
+        pixelRatio: 3,
       })
 
       const pdf = new jsPDF({
