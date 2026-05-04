@@ -49,20 +49,19 @@ test.describe('CV Builder', () => {
     await sidebar(page).locator('button', { hasText: 'Experience' }).click()
     await expect(panel.getByText('Work Experience')).toBeVisible()
 
-    // Count initial experience cards
     const cardLocator = panel.locator('div.p-3.bg-gray-50.rounded-md')
     const initialCards = await cardLocator.count()
 
-    // Click "+ Add Experience"
+    // Add two cards (Remove button only appears when there is more than one card)
     await panel.getByRole('button', { name: '+ Add Experience' }).click()
-
-    // Should have one more card
     await expect(cardLocator).toHaveCount(initialCards + 1)
+
+    await panel.getByRole('button', { name: '+ Add Experience' }).click()
+    await expect(cardLocator).toHaveCount(initialCards + 2)
 
     // Click "Remove" on the last card
     await panel.locator('button', { hasText: 'Remove' }).last().click()
-
-    await expect(cardLocator).toHaveCount(initialCards)
+    await expect(cardLocator).toHaveCount(initialCards + 1)
   })
 
   test('add and remove language', async ({ page }) => {
