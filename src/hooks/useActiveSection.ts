@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react'
 import type { SectionId } from '../config/cvSections'
 
 export function useActiveSection() {
-  const [activeSection, setActiveSection] = useState<SectionId | null>('personal')
-  const [formOpen, setFormOpen] = useState(true)
+  const [activeSection, setActiveSection] = useState<SectionId | null>(null)
+  const [formOpen, setFormOpen] = useState(false)
 
   const handleSectionChange = useCallback((section: SectionId) => {
     setActiveSection(section)

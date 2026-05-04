@@ -3,10 +3,10 @@ import { renderHook, act } from '@testing-library/react'
 import { useActiveSection } from '../useActiveSection'
 
 describe('useActiveSection', () => {
-  it('initializes with "personal" active and form open', () => {
+  it('initializes with no section active and form closed', () => {
     const { result } = renderHook(() => useActiveSection())
-    expect(result.current.activeSection).toBe('personal')
-    expect(result.current.formOpen).toBe(true)
+    expect(result.current.activeSection).toBeNull()
+    expect(result.current.formOpen).toBe(false)
   })
 
   it('handleSectionChange updates section and opens form', () => {
