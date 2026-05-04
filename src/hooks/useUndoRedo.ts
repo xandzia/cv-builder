@@ -92,12 +92,10 @@ export function useUndoRedo<T>(initialValue: T) {
     dispatch({ type: 'RESET', value })
   }, [])
 
-  // Sync liveValue when undo/redo/reset changes the present
-  // This is needed because undo/redo update state.present directly
-  const prevPresent = useRef(state.present)
-  if (prevPresent.current !== state.present) {
-    prevPresent.current = state.present
-    // Only sync if liveValue is stale (undo/redo happened)
+  // Sync liveValue when undo/redo changes state.present (derived state pattern)
+  const [prevPresent, setPrevPresent] = useState<T>(state.present)
+  if (prevPresent !== state.present) {
+    setPrevPresent(state.present)
     if (liveValue !== state.present) {
       setLiveValue(state.present)
     }

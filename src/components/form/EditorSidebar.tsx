@@ -16,7 +16,7 @@ export function DesktopSidebar({ activeSection, onSectionChange, accentColor }: 
   const { t } = useI18n()
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent, index: number) => {
-    let next = index
+    let next: number
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       next = (index + 1) % SECTIONS.length
