@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# CV Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CV Builder is a single-page application that allows users to create a clean, professional frontend developer CV and export it as a PDF.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Dynamic form with multiple sections:
+    - Personal Info
+    - Skills
+    - Experience
+    - Projects
+    - Education
+    - Languages
+    - Extras
+- Live A4 preview that matches the exported PDF
+- One-click PDF export
+- Undo / redo support with debounced history
+- Customizable accent color
+- Responsive UI (desktop sidebar + mobile tabs)
+- i18n support
 
-## React Compiler
+## 🧠 How it works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- The app is split into two main parts:
+    - **Editor (left panel)** — form inputs
+    - **Preview (right panel)** — real-time CV rendering
 
-## Expanding the ESLint configuration
+- The preview is rendered inside a fixed A4 layout and exported directly to PDF using `html2pdf.js`.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Only the `#cv-preview` element is included in the final PDF.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🏗 Architecture
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Global state (`CVData`) is managed in `App.tsx`
+- All form components are **controlled**
+- Preview uses **inline styles** to ensure correct rendering in `html2canvas`
+- Undo/redo implemented via custom hook (`useUndoRedo`) with 500ms debounce
+- Section navigation handled via `EditorSidebar`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🎨 Styling
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Tailwind CSS is used for the application UI
+- Inline styles are used inside the CV preview (PDF consistency)
+- Clean European CV design:
+    - No gradients
+    - No progress bars
+    - Minimalistic layout
+    - Custom square bullets
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- html2pdf.js (jsPDF + html2canvas)
+
+## 🚀 Getting Started
+
+```bash
+npm install
+npm run dev
