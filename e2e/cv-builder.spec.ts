@@ -50,20 +50,19 @@ test.describe('CV Builder', () => {
     await expect(panel.getByText('Work Experience')).toBeVisible()
 
     // Count initial experience cards
-    const initialCards = await panel.locator('text=Experience #').count()
+    const cardLocator = panel.locator('div.p-3.bg-gray-50.rounded-md')
+    const initialCards = await cardLocator.count()
 
     // Click "+ Add Experience"
     await panel.getByRole('button', { name: '+ Add Experience' }).click()
 
     // Should have one more card
-    const afterAddCards = await panel.locator('text=Experience #').count()
-    expect(afterAddCards).toBe(initialCards + 1)
+    await expect(cardLocator).toHaveCount(initialCards + 1)
 
     // Click "Remove" on the last card
     await panel.locator('button', { hasText: 'Remove' }).last().click()
 
-    const afterRemoveCards = await panel.locator('text=Experience #').count()
-    expect(afterRemoveCards).toBe(initialCards)
+    await expect(cardLocator).toHaveCount(initialCards)
   })
 
   test('add and remove language', async ({ page }) => {
@@ -71,9 +70,6 @@ test.describe('CV Builder', () => {
 
     // Navigate to Languages
     await sidebar(page).locator('button', { hasText: 'Languages' }).click()
-
-    // The Languages form section is collapsed by default — open it
-    await panel.locator('summary').click()
 
     // Count initial language inputs
     const initialLangs = await panel.locator('input[placeholder="Native, C1, B2..."]').count()
