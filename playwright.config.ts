@@ -5,8 +5,11 @@ export default defineConfig({
   timeout: 30_000,
   retries: 0,
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:5173/cv-builder/',
     headless: true,
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'on-first-retry',
   },
   projects: [
     { name: 'chromium', use: { browserName: 'chromium' } },

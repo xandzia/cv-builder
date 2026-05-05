@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('CV Builder', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/cv-builder/')
     await page.waitForLoadState('networkidle')
   })
 
@@ -124,7 +124,7 @@ test.describe('CV Builder', () => {
 
   test('mobile viewport shows tab navigation', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 })
-    await page.goto('/')
+    await page.goto('/cv-builder/')
     await page.waitForLoadState('networkidle')
 
     // Mobile tabs nav should be visible
