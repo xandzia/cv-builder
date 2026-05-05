@@ -32,7 +32,8 @@ test.describe('CV Builder', () => {
   })
 
   test('editing personal info updates preview', async ({ page }) => {
-    // Use getByRole to find the Full Name input inside the form panel
+    await sidebar(page).locator('button', { hasText: 'Personal' }).click()
+
     const nameInput = formPanel(page).getByRole('textbox', { name: 'Full Name' })
     await nameInput.clear()
     await nameInput.fill('Test User')
@@ -95,7 +96,8 @@ test.describe('CV Builder', () => {
   test('close and reopen form panel', async ({ page }) => {
     const panel = formPanel(page)
 
-    // Panel should be visible initially
+    // Open a section first
+    await sidebar(page).locator('button', { hasText: 'Personal' }).click()
     await expect(panel).toBeVisible()
 
     // Click the close button (X icon) — it's inside the drag handle area
