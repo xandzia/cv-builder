@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   base: '/cv-builder/',
+  build: {
+    sourcemap: true, // TODO: need to link with Sentry
+  },
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
